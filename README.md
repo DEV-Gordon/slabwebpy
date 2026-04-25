@@ -74,15 +74,33 @@ slabwebpy/
 
 ## Roadmap
 
-| Area | What we already have (checklist) | What we will add (no checklist) |
+### Implemented Now
+
+Everything in this table is already available in the current version.
+
+| Area | Current Status | Included |
 |---|---|---|
-| Core | - [x] Static HTML build<br>- [x] Internal block state<br>- [x] Public API from __init__.py | Official CLI (build, serve, new), packaging with pyproject.toml |
-| Components | - [x] Navbar<br>- [x] Hero<br>- [x] Section<br>- [x] Grid + Grid End<br>- [x] Card<br>- [x] Button<br>- [x] Text<br>- [x] Badge<br>- [x] Divider<br>- [x] Spacer<br>- [x] Footer | Advanced components (FAQ, pricing table, testimonials, gallery, timeline) |
-| Themes and Styling | - [x] Basic color palette<br>- [x] Button size scales<br>- [x] Predefined backgrounds | Design tokens, project-level custom themes, configurable dark mode |
-| Local Development | - [x] Local server with serve()<br>- [x] Build before server start | Autoreload on file changes and DX improvements for faster development |
-| Quality | - [x] Functional landing page example | Unit tests, linting, CI, release flow, and changelog |
-| Sites and Content | - [x] Single-page generation | Multi-page support, reusable layouts, SEO metadata, and Markdown content support |
-| Extensibility | - [x] Modular codebase split by file | Plugin/hook system and static asset pipeline |
+| Core | Implemented | - [x] Static HTML build<br>- [x] Internal block state<br>- [x] Public API from __init__.py |
+| Components | Implemented | - [x] Navbar<br>- [x] Hero<br>- [x] Section<br>- [x] Grid + Grid End<br>- [x] Card<br>- [x] Button<br>- [x] Text<br>- [x] Badge<br>- [x] Divider<br>- [x] Spacer<br>- [x] Footer |
+| Themes and Styling | Implemented | - [x] Basic color palette<br>- [x] Button size scales<br>- [x] Predefined backgrounds |
+| Local Development | Implemented | - [x] Local server with serve()<br>- [x] Build before server start |
+| Quality | Implemented | - [x] Functional landing page example |
+| Sites and Content | Implemented | - [x] Single-page generation |
+| Extensibility | Implemented | - [x] Modular codebase split by file |
+
+### Planned (Not Implemented Yet)
+
+Everything in this table is planned for future versions and is not available yet.
+
+| Area | Planned Additions |
+|---|---|
+| Core | Official CLI (build, serve, new), packaging with pyproject.toml |
+| Components | Advanced components (FAQ, pricing table, testimonials, gallery, timeline) |
+| Themes and Styling | Design tokens, project-level custom themes, configurable dark mode |
+| Local Development | Autoreload on file changes and DX improvements for faster development |
+| Quality | Unit tests, linting, CI, release flow, and changelog |
+| Sites and Content | Multi-page support, reusable layouts, SEO metadata, and Markdown content support |
+| Extensibility | Plugin/hook system and static asset pipeline |
 
 ## Author
 

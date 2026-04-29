@@ -360,3 +360,5 @@ def video():
 def timeline():
     """Timeline / roadmap component (coming soon)."""
     pass
+
+"""*Autor: DEV-Gordon (Carlos Zarate) — https://github.com/DEV-Gordon/slabwebpy*"""

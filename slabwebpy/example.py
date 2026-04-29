@@ -83,3 +83,5 @@ swp.footer("© 2024 SlabWebPy. DevGordon. For all students and developers.")
 
 # Build the site
 swp.build("dist/index.html")
+
+"""*Autor: DEV-Gordon (Carlos Zarate) — https://github.com/DEV-Gordon/slabwebpy*"""

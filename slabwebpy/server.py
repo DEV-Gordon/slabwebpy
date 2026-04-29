@@ -52,3 +52,5 @@ def serve(output: str = "index.html", port: int = 8000, open_browser: bool = Tru
             httpd.serve_forever()
         except KeyboardInterrupt:
             print("\n  Server stopped\n")
+
+"""*Autor: DEV-Gordon (Carlos Zarate) — https://github.com/DEV-Gordon/slabwebpy*"""

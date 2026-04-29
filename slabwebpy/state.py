@@ -31,3 +31,6 @@ def reset():
     global _blocks, _page_title
     _blocks = []
     _page_title = "My Page"
+
+
+"""*Autor: DEV-Gordon (Carlos Zarate) — https://github.com/DEV-Gordon/slabwebpy*"""

@@ -70,60 +70,7 @@ slabwebpy/
   dist/
 ```
 
-## Roadmap
 
-### Implemented Now (v0.1.x)
-
-Everything below is already available.
-
-| Area | Current Status | Included |
-|---|---|---|
-| Core Engine | Implemented | - [x] Static HTML build engine<br>- [x] Internal page state management<br>- [x] Public package API |
-| Components | Implemented | - [x] Base component system<br>- [x] Navbar, Hero, Section, Grid, Card, Button, Text, Badge, Divider, Spacer, Footer |
-| Styling | Implemented | - [x] Theme helpers and style utilities |
-| Development | Implemented | - [x] Local development server |
-| Example | Implemented | - [x] Functional landing page example |
-
-### Planned (Not Implemented Yet)
-
-Everything below is planned for future versions and is not available yet.
-
-| Horizon | Version / Focus | Planned Additions |
-|---|---|---|
-| Short Term | v0.2.0 - Usability and Product Foundation | Official packaging with pyproject.toml; editable local install flow; initial CLI commands (build, serve, new); component parameter validations; clearer and more actionable error messages; improved and expanded official examples |
-| Short Term | v0.2.1 - Quality and Reliability | Unit tests for build and internal state; render tests for core components; formatting and linting conventions; contributor guide |
-| Mid Term | v0.3.0 - Framework Scalability | Multi-page support (home, about, contact, etc.); reusable layouts (header, footer, global shell); centralized site configuration |
-| Mid Term | v0.3.1 - Content and SEO | SEO metadata support (title, description, og tags); favicon and social cards support; optional Markdown content workflow |
-| Mid Term | v0.4.0 - Ecosystem and Extensibility | Plugin/hook system; static asset pipeline (images, fonts, css); advanced components (FAQ, pricing table, testimonials, gallery) |
-
-### Backlog (No Scheduled Version)
-
-- Configurable dark mode
-- Starter templates
-- Basic internationalization
-- Incremental page generation
-- CI integration for automated releases
-
-### Prioritization Criteria
-
-- End-user impact
-- Implementation effort
-- Reduction of common usage errors
-- Foundation value for future features
-
-### Progress Metrics
-
-- Time to create a functional landing page
-- Number of stable components
-- Test coverage
-- Issues closed per version
-- Average build time
-
-## Author
-
-- Name: DEV-Gordon (Carlos Zarate)
-- GitHub: https://github.com/DEV-Gordon
-- Project: https://github.com/DEV-Gordon/slabwebpy
 
 ## License
 

@@ -8,6 +8,7 @@ from . import state
 from . import themes
 
 
+# Legacy components 0.1 (will be refactored in future versions)
 def title(text: str):
     """Sets the browser <title> of the page.
 
@@ -15,7 +16,6 @@ def title(text: str):
         slab.title("Mi Landing")
     """
     state.set_title(text)
-
 
 def navbar(
     brand: str = "MyBrand",
@@ -51,7 +51,6 @@ def navbar(
       </div>
     </nav>
     """)
-
 
 def hero(
     title_text: str,
@@ -98,7 +97,6 @@ def hero(
     </section>
     """)
 
-
 def section(
     title_text: str = "",
     subtitle: str = "",
@@ -136,7 +134,6 @@ def section(
     </section>
     """)
 
-
 def grid(columns: int = 3, gap: str = "6"):
     """Opens a responsive grid. Close it with grid_end().
 
@@ -158,11 +155,9 @@ def grid(columns: int = 3, gap: str = "6"):
     cols = col_map.get(columns, col_map[3])
     state.add(f'<div class="max-w-6xl mx-auto px-6 py-10 grid {cols} gap-{gap}">')
 
-
 def grid_end():
     """Closes a grid opened with grid()."""
     state.add("</div>")
-
 
 def card(
     title_text: str,
@@ -195,7 +190,6 @@ def card(
       <p class="text-gray-500 text-sm leading-relaxed">{body}</p>
     </div>
     """)
-
 
 def button(
     label: str,
@@ -231,7 +225,6 @@ def button(
 
     state.add(f'<div class="px-6 py-2"><a href="{url}" class="{cls}">{label}</a></div>')
 
-
 def text(
     content: str,
     size: str = "base",
@@ -259,7 +252,6 @@ def text(
         f'{content}</{tag}>'
     )
 
-
 def badge(label: str, color: str = "blue"):
     """Small inline badge / tag.
 
@@ -276,7 +268,6 @@ def badge(label: str, color: str = "blue"):
         f'rounded-full mx-6 my-2 inline-block">{label}</span>'
     )
 
-
 def divider(margin: str = "8"):
     """Horizontal divider line.
 
@@ -288,7 +279,6 @@ def divider(margin: str = "8"):
     """
     state.add(f'<hr class="border-gray-200 my-{margin} mx-6" />')
 
-
 def spacer(size: str = "8"):
     """Empty vertical space.
 
@@ -299,7 +289,6 @@ def spacer(size: str = "8"):
         slab.spacer("12")
     """
     state.add(f'<div class="h-{size}"></div>')
-
 
 def footer(text_content: str = "© 2025 Mi Empresa", bg: str = "gray"):
     """Page footer.
@@ -318,3 +307,55 @@ def footer(text_content: str = "© 2025 Mi Empresa", bg: str = "gray"):
     }
     cls = bg_map.get(bg, bg_map["gray"])
     state.add(f'<footer class="{cls} text-center text-sm py-8 px-6">{text_content}</footer>')
+
+# New Components 1/2 0.2.0
+
+def image():
+    """Image component (coming soon)."""
+    pass
+
+def form():
+    """Form component (coming soon)."""
+    pass
+
+def alert():
+    """Alert / notification component (coming soon)."""
+    pass
+
+def table():
+    """Table component (coming soon)."""
+    pass
+
+def pricing_card():
+    """Pricing card component (coming soon)."""
+    pass
+
+def faq():
+    """FAQ accordion component (coming soon)."""
+    pass
+
+# New Components 2/2 0.3.0
+
+def faq():
+    """FAQ accordion component (coming soon)."""
+    pass
+
+def gallery():
+    """Image gallery component (coming soon)."""
+    pass
+
+def code_block():
+    """Code block component (coming soon)."""
+    pass
+
+def stats_card():
+    """Statistics card component (coming soon)."""
+    pass
+
+def video():
+    """Video embed component (coming soon)."""
+    pass
+
+def timeline():
+    """Timeline / roadmap component (coming soon)."""
+    pass

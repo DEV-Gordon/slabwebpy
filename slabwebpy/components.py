@@ -9,6 +9,7 @@ from . import themes
 
 
 # Legacy components 0.1 (will be refactored in future versions)
+
 def title(text: str):
     """Sets the browser <title> of the page.
 

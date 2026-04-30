@@ -311,9 +311,123 @@ def footer(text_content: str = "© 2025 Mi Empresa", bg: str = "gray"):
 
 # New Components 1/2 0.2.0
 
-def image():
-    """Image component (coming soon)."""
-    pass
+def image(
+    src: str,
+    alt: str = "",
+    size: str = "full",
+    rounded: str = "md",
+    align: str = "center",
+    caption: str = "",
+    aspect: str = "",
+    shadow: bool = False,
+    link: str = "",):
+
+    """Image component with optional caption and link.
+    Args:
+        src:     URL or relative path to the image.
+        alt:     Alternative text (recommended for accessibility).
+        size:    Width of the image: "full", "xl", "lg", "md", "sm", "xs".
+        rounded: Corner rounding: "none", "sm", "md", "lg", "xl", "full".
+        align:   Horizontal alignment: "left", "center", "right".
+        caption: Optional text shown below the image.
+        aspect:  Aspect ratio container: "video" (16:9), "square", "portrait" (4:5).
+                 Leave empty to use the image's natural dimensions.
+        shadow:  Add a soft shadow if True.
+        link:    Wrap the image in an anchor tag if provided.
+    Example:
+        swp.image(
+            "https://routetest/800/400",
+            alt="A random photo",
+            size="lg",
+            rounded="xl",
+            caption="A placeholder image",
+            shadow=True,
+        )
+        swp.image(
+            "hero.jpg",
+            alt="Hero banner",
+            size="full",
+            aspect="video",
+            rounded="lg",
+        )
+    """
+    
+    # Sizes
+    size_map = {
+        "full": "w-full",
+        "xl": "max-w-4xl",
+        "lg": "max-w-2xl",
+        "md": "max-w-xl",
+        "sm": "max-w-sm",
+        "xs": "max-w-xs",
+    }
+
+    # Rounded corners
+    rounded_map = {
+        "none": "rounded-none",
+        "sm": "rounded-sm",
+        "md": "rounded-md",
+        "lg": "rounded-lg",
+        "xl": "rounded-xl",
+        "full": "rounded-full",
+    }
+
+    # Aspect ratios map
+    aspect_map = {
+        "video": "aspect-video",
+        "square": "aspect-square",
+        "portrait": "aspect-[4/5]",
+    }
+
+    # alignment map for the container
+    align_map = {
+        "left": "mr-auto",
+        "center": "mx-auto",
+        "right": "ml-auto",
+    }
+
+    w_cls = size_map.get(size, "w-full")
+    r_cls = rounded_map.get(rounded, "rounded-md")
+    a_cls = align_map.get(align, "mx-auto")
+    shadow_cls = "shadow-lg" if shadow else ""
+    aspect_cls = aspect_map.get(aspect, "")
+
+    # inner <img> tag
+    img_cls = f"w-full h-full object-cover {r_cls} {shadow_cls}".strip()
+    
+    # Wrap in aspect ratio container if needed
+    if aspect_cls:
+        inner = (
+            f'<div class="{aspect_cls} overflow-hidden {r_cls} {shadow_cls}">'
+            f'<img src="{src}" alt="{alt}" class="w-full h-full object-cover" loading="lazy" />'
+            f'</div>'
+        )
+    else:
+        inner = f'<img src="{src}" alt="{alt}" class="{img_cls}" loading="lazy" />'
+
+    # Wrap in link if provided
+    if link:
+        inner = (
+            f'<a href="{link}" target="_blank" rel="noopener noreferrer" '
+            f'class="block hover:opacity-90 transition">'
+            f'{inner}</a>'
+        )
+
+    # Caption
+    caption_html = ""
+    if caption:
+        caption_html = (
+            f'<p class="text-gray-400 text-sm text-center mt-2 italic">{caption}</p>'
+        )
+
+    state.add(
+        f'<div class="px-6 py-4">'
+        f'<figure class="{w_cls} {a_cls}">'
+        f'{inner}'
+        f'{caption_html}'
+        f'</figure>'
+        f'</div>'
+    )
 
 def form():
     """Form component (coming soon)."""

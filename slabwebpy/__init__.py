@@ -22,6 +22,8 @@ from .components import (
     divider,
     spacer,
     footer,
+    faq,
+    image,
 )
 
 from .builder import build

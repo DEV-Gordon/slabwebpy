@@ -331,7 +331,7 @@ def image(
         align:   Horizontal alignment: "left", "center", "right".
         caption: Optional text shown below the image.
         aspect:  Aspect ratio container: "video" (16:9), "square", "portrait" (4:5).
-                 Leave empty to use the image's natural dimensions.
+                    Leave empty to use the image's natural dimensions.
         shadow:  Add a soft shadow if True.
         link:    Wrap the image in an anchor tag if provided.
     Example:
@@ -445,9 +445,112 @@ def pricing_card():
     """Pricing card component (coming soon)."""
     pass
 
-def faq():
-    """FAQ accordion component (coming soon)."""
-    pass
+def faq(
+    items: list[dict],
+    title: str = "",
+    color: str = "indigo",
+    bg: str = "white",
+    divided: bool = True,
+    open_first: bool = False,
+):
+    """FAQ accordion component. Uses native HTML <details>/<summary> — no JavaScript needed.
+
+    Args:
+        items:      List of dicts with keys "q" (question) and "a" (answer).
+                    "a" supports basic HTML (links, <strong>, <em>, etc.).
+        title:      Optional section heading above the FAQ list.
+        color:      Accent color for the summary arrow and focus ring.
+        bg:         Background of the section: "white", "gray", "dark".
+        divided:    Show a divider line between items if True.
+        open_first: Expand the first item by default if True.
+
+    Example:
+        swp.faq(
+            title="Frequently Asked Questions",
+            color="indigo",
+            items=[
+                {
+                    "q": "Do I need Node.js or npm?",
+                    "a": "No. SlabWebPy uses only Python and the Tailwind CDN. "
+                        "No build step required.",
+                },
+                {
+                    "q": "Can I deploy the output to GitHub Pages?",
+                    "a": "Yes — the generated <code>dist/index.html</code> is a "
+                        "standalone static file. Drop it anywhere.",
+                },
+                {
+                    "q": "Is it free?",
+                    "a": 'It is <a href="https://github.com/DEV-Gordon/slabwebpy" '
+                        'class="text-indigo-600 underline">open source</a> under the MIT License.',
+                },
+            ],
+            open_first=True,
+        )
+    """
+
+    # Colors
+    accent_text  = themes.color(color, 1)      # e.g. "text-indigo-600"
+    accent_hover = themes.color(color, 3)      # e.g. "hover:bg-indigo-700"  (used for focus ring)
+
+    # Background
+    bg_map = {
+        "white": ("bg-white",    "text-gray-900", "text-gray-600"),
+        "gray":  ("bg-gray-50",  "text-gray-900", "text-gray-600"),
+        "dark":  ("bg-gray-900", "text-white",    "text-gray-300"),
+    }
+    bg_cls, title_color, body_color = bg_map.get(bg, bg_map["white"])
+    divider_cls = "border-b border-gray-100" if divided else ""
+    dark_divider = "border-b border-gray-700" if bg == "dark" else divider_cls
+
+    # Optional heading
+    title_html = ""
+    if title:
+        title_html = (
+            f'<h2 class="{title_color} text-2xl font-bold text-center mb-8">{title}</h2>'
+        )
+
+    # Build <details> items
+    # The CSS triangle rotates on [open] using a pure-CSS trick (no JS).
+    # The marker list-style is removed and a custom SVG chevron is injected via
+    # a ::before pseudo-element encoded as a data URI — but since we're writing
+    # inline HTML we use a Unicode arrow and rotate it with a <span>.
+    detail_items = []
+    for idx, item in enumerate(items):
+        q = item.get("q", "")
+        a = item.get("a", "")
+        open_attr = "open" if (open_first and idx == 0) else ""
+        dark_text = "text-white" if bg == "dark" else "text-gray-900"
+        dark_body = "text-gray-300" if bg == "dark" else "text-gray-600"
+        dark_bg   = "hover:bg-gray-800" if bg == "dark" else "hover:bg-gray-50"
+
+        detail_items.append(f"""
+        <details {open_attr} class="group {dark_divider}">
+        <summary class="flex items-center justify-between gap-4 py-4 px-2
+                        cursor-pointer list-none select-none rounded-lg
+                        {dark_bg} transition
+                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-{color}-400">
+            <span class="{dark_text} text-base font-medium">{q}</span>
+            <span class="{accent_text} text-lg font-bold flex-shrink-0
+                        transition-transform duration-200 group-open:rotate-45">+</span>
+        </summary>
+        <div class="pb-4 px-2">
+            <p class="{dark_body} text-sm leading-relaxed">{a}</p>
+        </div>
+        </details>""")
+
+    items_html = "\n".join(detail_items)
+
+    state.add(
+        f'<section class="{bg_cls} py-16 px-6">'
+        f'<div class="max-w-3xl mx-auto">'
+        f'{title_html}'
+        f'<div class="divide-y divide-gray-100">'
+        f'{items_html}'
+        f'</div>'
+        f'</div>'
+        f'</section>'
+    )
 
 # New Components 2/2 0.3.0
 

@@ -4,6 +4,7 @@ slab.components — All visual components.
 Each function appends HTML to the current page state.
 """
 
+import html
 from . import state
 from . import themes
 
@@ -687,7 +688,6 @@ def form(
         f'</section>'
     )
 
-
 def alert(
     message: str,
     kind: str = "info",              # "info" | "success" | "warning" | "error"
@@ -698,13 +698,101 @@ def alert(
     allow_html: bool = False,
     classes: str = "",
 ):
+    """Alert / notification component with optional dismiss and auto-timeout.
+
+    Args:
+        message:     Main alert text (escaped by default for security).
+        kind:        Alert type: "info", "success", "warning", "error".
+                     Determines color and icon.
+        title:       Optional heading above the message (escaped by default).
+        dismissable: Show a close button if True (uses inline onclick).
+        icon:        Display an SVG icon matching the kind if True.
+        timeout:     Auto-dismiss after N seconds (optional, uses inline JS).
+        allow_html:  Allow raw HTML in message/title if True (XSS risk if user input).
+        classes:     Extra CSS classes for the container.
+
+    Example:
+        swp.alert(
+            "Your changes have been saved.",
+            kind="success",
+            title="Success",
+            icon=True,
+            dismissable=True,
+        )
+        swp.alert(
+            "This action cannot be undone.",
+            kind="warning",
+            dismissable=True,
+            timeout=5,
+        )
+    """
+    # map logical kinds to theme color names
+    kind_map = {
+        "info": "indigo",
+        "success": "green",
+        "warning": "yellow",
+        "error": "red",
+    }
+    color_name = kind_map.get(kind, "indigo")
+
+    # palette from themes
+    text_accent = themes.color(color_name, 1)  # e.g. "text-indigo-600"
+    border_accent = themes.color(color_name, 2)  # e.g. "border-indigo-600"
+
+    # semantic a11y
+    aria_live = "assertive" if kind == "error" else "polite"
+    role = "alert"
+
+    # escape unless allow_html
+    def esc(s: str) -> str:
+        return s if allow_html else html.escape(s)
+
+    title_html = f'<div class="font-semibold {text_accent} mb-1">{esc(title)}</div>' if title else ""
+    msg_html = esc(message)
+
+    # simple icon set (uses currentColor so it follows text_accent)
+    icons = {
+        "info": '<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg>',
+        "success": '<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>',
+        "warning": '<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>',
+        "error": '<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>',
+    }
+    icon_html = f'<div class="{text_accent} mr-3 flex-shrink-0">{icons.get(kind)}</div>' if icon else ""
+
+    # dismiss button
+    dismiss_html = ""
+    if dismissable:
+        dismiss_html = (
+            f'<button type="button" aria-label="Dismiss alert" '
+            f'class="ml-auto text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 rounded" '
+            f'onclick="this.closest(\'.swp-alert\').style.display=\'none\'" '
+            f'tabindex="0">'
+            f'<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>'
+            f'</button>'
+        )
+
+    # optional timeout JS (in milliseconds)
+    timeout_js = ""
+    if timeout and isinstance(timeout, int) and timeout > 0:
+        alert_id = f"swp-alert-{id(message) % 1000000}"
+        timeout_js = f'<script>setTimeout(()=>{{var el=document.getElementById(\'{alert_id}\');if(el)el.style.display=\'none\';}},(timeout)*1000)</script>'.replace("(timeout)", str(timeout))
+
+    state.add(
+        f'<div class="flex justify-center px-6 py-4">'
+        f'<div id="swp-alert-{id(message) % 1000000}" class="swp-alert bg-white border rounded-md p-4 flex items-start gap-3 border {border_accent} max-w-2xl w-full {classes}" role="{role}" aria-live="{aria_live}">'
+        f'{icon_html}'
+        f'<div class="min-w-0 flex-1">'
+        f'{title_html}'
+        f'<div class="text-sm text-gray-700">{msg_html}</div>'
+        f'</div>'
+        f'{dismiss_html}'
+        f'</div>'
+        f'</div>'
+        f'{timeout_js}'
+    )
 
 def table():
     """Table component (coming soon)."""
-    pass
-
-def pricing_card():
-    """Pricing card component (coming soon)."""
     pass
 
 def faq(
@@ -814,13 +902,90 @@ def faq(
         f'</section>'
     )
 
-def code_block():
-    """Code block component (coming soon)."""
-    pass
+def code_block(
+    code: str,
+    language: str = "python",
+    title: str = "",
+    copy_button: bool = True,
+    line_numbers: bool = False,
+    theme: str = "light",
+):
+    """Code block / snippet display with optional syntax language label, copy button, and line numbers.
+
+    Args:
+        code:         The source code to display (will be escaped for security).
+        language:     Programming language name (python, javascript, html, etc.).
+                        Used for labeling; syntax highlighting requires highlight.js CDN integration.
+        title:        Optional filename or label shown above the code block.
+        copy_button:  Show a "Copy" button if True (uses inline onclick).
+        line_numbers: Display line numbers on the left if True.
+        theme:        Background theme: "light" or "dark".
+
+    Example:
+        swp.code_block(
+            '''def hello(name: str):
+    print(f"Hello, {name}!")
+hello("SlabWebPy")''',
+            language="python",
+            title="hello.py",
+            copy_button=True,
+            line_numbers=True,
+            theme="dark",
+        )
+    """
+    # Escape code for security
+    escaped_code = html.escape(code)
+
+    # Theme mapping
+    theme_map = {
+        "light": ("bg-gray-50", "text-gray-900", "border-gray-200", "bg-gray-100", "text-gray-400"),
+        "dark": ("bg-gray-900", "text-gray-100", "border-gray-700", "bg-gray-800", "text-gray-500"),
+    }
+    bg_cls, text_cls, border_cls, header_bg, line_num_cls = theme_map.get(theme, theme_map["light"])
+
+    # Header with title and copy button
+    header_html = ""
+    if title or copy_button:
+        title_html = f'<span class="font-mono text-sm font-semibold">{html.escape(title)}</span>' if title else ""
+        copy_btn_html = ""
+        if copy_button:
+            code_id = f"swp-code-{id(code) % 1000000}"
+            copy_btn_html = (
+                f'<button type="button" aria-label="Copy code" '
+                f'class="ml-auto px-3 py-1.5 text-xs font-medium rounded bg-gray-600 hover:bg-gray-700 text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" '
+                f'onclick="var el=document.getElementById(\'{code_id}\');var text=el.textContent;navigator.clipboard.writeText(text).then(()=>{{this.textContent=\'Copied!\';setTimeout(()=>{{this.textContent=\'Copy\'}},2000)}});">'
+                f'Copy</button>'
+            )
+        header_html = f'<div class="{header_bg} border-b {border_cls} px-4 py-3 flex items-center gap-2">{title_html}{copy_btn_html}</div>'
+
+    # Build lines with optional line numbers
+    lines = escaped_code.split('\n')
+    if line_numbers:
+        line_items = []
+        for i, line in enumerate(lines, 1):
+            line_num_html = f'<span class="{line_num_cls} inline-block w-8 text-right pr-4">{i}</span>'
+            line_items.append(f'<div>{line_num_html}{line or " "}</div>')
+        code_html = '\n'.join(line_items)
+    else:
+        code_html = escaped_code
+
+    # Code container
+    code_id = f"swp-code-{id(code) % 1000000}"
+    state.add(
+        f'<div class="flex justify-center px-6 py-4">'
+        f'<div class="w-full max-w-4xl rounded-lg overflow-hidden border {border_cls} shadow-sm">'
+        f'{header_html}'
+        f'<pre id="{code_id}" class="{bg_cls} {text_cls} p-4 overflow-x-auto font-mono text-sm leading-relaxed"><code>{code_html}</code></pre>'
+        f'</div>'
+        f'</div>'
+    )
 
 # New Components 2/2 0.3.0
+def pricing_card():
+    """Pricing card component (coming soon)."""
+    pass
 
-def gallery():.
+def gallery():
     """Image gallery component (coming soon)."""
     pass
 

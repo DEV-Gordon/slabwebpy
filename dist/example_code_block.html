@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SlabWebPy — Code Block Component</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <span class="text-gray-800 text-xl font-bold tracking-tight">SlabWebPy</span>
+        <div class="flex gap-6"><a href="#" class="text-gray-800 hover:opacity-70 font-medium transition">Home</a><a href="#" class="text-gray-800 hover:opacity-70 font-medium transition">Docs</a></div>
+      </div>
+    </nav>
+    
+
+    <section class="bg-indigo-600 py-24 px-6 text-center">
+      <div class="max-w-3xl mx-auto space-y-6">
+        <h1 class="text-white text-5xl font-extrabold tracking-tight leading-tight">Code Block Component</h1>
+        <p class="text-white/80 text-xl">Display source code with syntax labeling, copy button, and line numbers</p>
+        <a href="#" class="bg-white text-indigo-600 font-semibold px-8 py-3 rounded-full shadow hover:shadow-lg transition text-base">View Docs</a>
+      </div>
+    </section>
+    
+
+    <section class="bg-white py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">Python Example — Light Theme</h2><p class="text-gray-500 text-lg text-center mt-2">With copy button and line numbers</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div class="w-full max-w-4xl rounded-lg overflow-hidden border border-gray-200 shadow-sm"><div class="bg-gray-100 border-b border-gray-200 px-4 py-3 flex items-center gap-2"><span class="font-mono text-sm font-semibold">fibonacci.py</span><button type="button" aria-label="Copy code" class="ml-auto px-3 py-1.5 text-xs font-medium rounded bg-gray-600 hover:bg-gray-700 text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onclick="var el=document.getElementById('swp-code-315968');var text=el.textContent;navigator.clipboard.writeText(text).then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy'},2000)});">Copy</button></div><pre id="swp-code-315968" class="bg-gray-50 text-gray-900 p-4 overflow-x-auto font-mono text-sm leading-relaxed"><code><div><span class="text-gray-400 inline-block w-8 text-right pr-4">1</span>def fibonacci(n: int) -&gt; int:</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">2</span>    &quot;&quot;&quot;Calculate the nth Fibonacci number.&quot;&quot;&quot;</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">3</span>    if n &lt;= 1:</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">4</span>        return n</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">5</span>    return fibonacci(n - 1) + fibonacci(n - 2)</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">6</span> </div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">7</span># Usage</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">8</span>result = fibonacci(10)</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">9</span>print(f&quot;Fibonacci(10) = {result}&quot;)</div></code></pre></div></div>
+<div class="h-6"></div>
+
+    <section class="bg-gray-50 py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">JavaScript Example — Dark Theme</h2><p class="text-gray-500 text-lg text-center mt-2">With line numbers and copy button</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div class="w-full max-w-4xl rounded-lg overflow-hidden border border-gray-700 shadow-sm"><div class="bg-gray-800 border-b border-gray-700 px-4 py-3 flex items-center gap-2"><span class="font-mono text-sm font-semibold">sum.js</span><button type="button" aria-label="Copy code" class="ml-auto px-3 py-1.5 text-xs font-medium rounded bg-gray-600 hover:bg-gray-700 text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onclick="var el=document.getElementById('swp-code-439344');var text=el.textContent;navigator.clipboard.writeText(text).then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy'},2000)});">Copy</button></div><pre id="swp-code-439344" class="bg-gray-900 text-gray-100 p-4 overflow-x-auto font-mono text-sm leading-relaxed"><code><div><span class="text-gray-500 inline-block w-8 text-right pr-4">1</span>const calculateSum = (arr) =&gt; {</div>
+<div><span class="text-gray-500 inline-block w-8 text-right pr-4">2</span>    return arr.reduce((acc, num) =&gt; acc + num, 0);</div>
+<div><span class="text-gray-500 inline-block w-8 text-right pr-4">3</span>};</div>
+<div><span class="text-gray-500 inline-block w-8 text-right pr-4">4</span> </div>
+<div><span class="text-gray-500 inline-block w-8 text-right pr-4">5</span>const numbers = [1, 2, 3, 4, 5];</div>
+<div><span class="text-gray-500 inline-block w-8 text-right pr-4">6</span>const sum = calculateSum(numbers);</div>
+<div><span class="text-gray-500 inline-block w-8 text-right pr-4">7</span>console.log(`Sum: ${sum}`);  // Output: Sum: 15</div></code></pre></div></div>
+<div class="h-6"></div>
+
+    <section class="bg-white py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">HTML Example</h2><p class="text-gray-500 text-lg text-center mt-2">Without line numbers</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div class="w-full max-w-4xl rounded-lg overflow-hidden border border-gray-200 shadow-sm"><div class="bg-gray-100 border-b border-gray-200 px-4 py-3 flex items-center gap-2"><span class="font-mono text-sm font-semibold">index.html</span><button type="button" aria-label="Copy code" class="ml-auto px-3 py-1.5 text-xs font-medium rounded bg-gray-600 hover:bg-gray-700 text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onclick="var el=document.getElementById('swp-code-466848');var text=el.textContent;navigator.clipboard.writeText(text).then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy'},2000)});">Copy</button></div><pre id="swp-code-466848" class="bg-gray-50 text-gray-900 p-4 overflow-x-auto font-mono text-sm leading-relaxed"><code>&lt;div class=&quot;container mx-auto p-6&quot;&gt;
+    &lt;h1 class=&quot;text-3xl font-bold mb-4&quot;&gt;Welcome!&lt;/h1&gt;
+    &lt;p class=&quot;text-gray-600&quot;&gt;This is a sample HTML snippet.&lt;/p&gt;
+&lt;/div&gt;</code></pre></div></div>
+<div class="h-6"></div>
+
+    <section class="bg-gray-50 py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">SQL Example</h2><p class="text-gray-500 text-lg text-center mt-2">Dark theme without title</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div class="w-full max-w-4xl rounded-lg overflow-hidden border border-gray-700 shadow-sm"><div class="bg-gray-800 border-b border-gray-700 px-4 py-3 flex items-center gap-2"><button type="button" aria-label="Copy code" class="ml-auto px-3 py-1.5 text-xs font-medium rounded bg-gray-600 hover:bg-gray-700 text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onclick="var el=document.getElementById('swp-code-844432');var text=el.textContent;navigator.clipboard.writeText(text).then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy'},2000)});">Copy</button></div><pre id="swp-code-844432" class="bg-gray-900 text-gray-100 p-4 overflow-x-auto font-mono text-sm leading-relaxed"><code><div><span class="text-gray-500 inline-block w-8 text-right pr-4">1</span>SELECT users.id, users.name, COUNT(orders.id) as order_count</div>
+<div><span class="text-gray-500 inline-block w-8 text-right pr-4">2</span>FROM users</div>
+<div><span class="text-gray-500 inline-block w-8 text-right pr-4">3</span>LEFT JOIN orders ON users.id = orders.user_id</div>
+<div><span class="text-gray-500 inline-block w-8 text-right pr-4">4</span>GROUP BY users.id, users.name</div>
+<div><span class="text-gray-500 inline-block w-8 text-right pr-4">5</span>ORDER BY order_count DESC</div>
+<div><span class="text-gray-500 inline-block w-8 text-right pr-4">6</span>LIMIT 10;</div></code></pre></div></div>
+<div class="h-6"></div>
+
+    <section class="bg-white py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">Bash Example</h2><p class="text-gray-500 text-lg text-center mt-2">Simple script</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div class="w-full max-w-4xl rounded-lg overflow-hidden border border-gray-200 shadow-sm"><div class="bg-gray-100 border-b border-gray-200 px-4 py-3 flex items-center gap-2"><span class="font-mono text-sm font-semibold">deploy.sh</span><button type="button" aria-label="Copy code" class="ml-auto px-3 py-1.5 text-xs font-medium rounded bg-gray-600 hover:bg-gray-700 text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onclick="var el=document.getElementById('swp-code-473088');var text=el.textContent;navigator.clipboard.writeText(text).then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy'},2000)});">Copy</button></div><pre id="swp-code-473088" class="bg-gray-50 text-gray-900 p-4 overflow-x-auto font-mono text-sm leading-relaxed"><code><div><span class="text-gray-400 inline-block w-8 text-right pr-4">1</span>#!/bin/bash</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">2</span># Deploy script</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">3</span>echo &quot;Building...&quot;</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">4</span>npm run build</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">5</span>echo &quot;Deploying to production...&quot;</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">6</span>git add .</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">7</span>git commit -m &quot;Deploy: $(date)&quot;</div>
+<div><span class="text-gray-400 inline-block w-8 text-right pr-4">8</span>git push origin main</div></code></pre></div></div>
+<div class="h-6"></div>
+
+    <section class="bg-gray-50 py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">JSON Example</h2><p class="text-gray-500 text-lg text-center mt-2">Configuration file</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div class="w-full max-w-4xl rounded-lg overflow-hidden border border-gray-700 shadow-sm"><div class="bg-gray-800 border-b border-gray-700 px-4 py-3 flex items-center gap-2"><span class="font-mono text-sm font-semibold">package.json</span><button type="button" aria-label="Copy code" class="ml-auto px-3 py-1.5 text-xs font-medium rounded bg-gray-600 hover:bg-gray-700 text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onclick="var el=document.getElementById('swp-code-439856');var text=el.textContent;navigator.clipboard.writeText(text).then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy'},2000)});">Copy</button></div><pre id="swp-code-439856" class="bg-gray-900 text-gray-100 p-4 overflow-x-auto font-mono text-sm leading-relaxed"><code>{
+  &quot;name&quot;: &quot;slabwebpy&quot;,
+  &quot;version&quot;: &quot;0.3.0&quot;,
+  &quot;description&quot;: &quot;Build modern web apps with Python&quot;,
+  &quot;author&quot;: &quot;DEV-Gordon&quot;,
+  &quot;license&quot;: &quot;MIT&quot;,
+  &quot;repository&quot;: &quot;https://github.com/DEV-Gordon/slabwebpy&quot;
+}</code></pre></div></div>
+<div class="h-6"></div>
+<footer class="bg-gray-100 text-gray-500 text-center text-sm py-8 px-6">© 2025 SlabWebPy · made with Python · https://github.com/DEV-Gordon/slabwebpy</footer>
+</body>
+</html>

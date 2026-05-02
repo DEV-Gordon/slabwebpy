@@ -25,6 +25,8 @@ from .components import (
     faq,
     image,
     form,
+    alert,
+    code_block
 )
 
 from .builder import build
@@ -45,6 +47,11 @@ __all__ = [
     "divider",
     "spacer",
     "footer",
+    "faq",
+    "image",
+    "form",
+    "alert",
+    "code_block",
     "build",
     "serve"
 ]

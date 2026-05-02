@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SlabWebPy — Alert Component Examples</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <span class="text-gray-800 text-xl font-bold tracking-tight">SlabWebPy</span>
+        <div class="flex gap-6"><a href="#" class="text-gray-800 hover:opacity-70 font-medium transition">Home</a><a href="#" class="text-gray-800 hover:opacity-70 font-medium transition">Docs</a></div>
+      </div>
+    </nav>
+    
+
+    <section class="bg-indigo-600 py-24 px-6 text-center">
+      <div class="max-w-3xl mx-auto space-y-6">
+        <h1 class="text-white text-5xl font-extrabold tracking-tight leading-tight">Alert Component</h1>
+        <p class="text-white/80 text-xl">4 visual kinds with optional dismiss and auto-timeout</p>
+        <a href="#" class="bg-white text-indigo-600 font-semibold px-8 py-3 rounded-full shadow hover:shadow-lg transition text-base">View Docs</a>
+      </div>
+    </section>
+    
+
+    <section class="bg-white py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">Info Alert</h2><p class="text-gray-500 text-lg text-center mt-2">For informational messages</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div id="swp-alert-90672" class="swp-alert bg-white border rounded-md p-4 flex items-start gap-3 border border-indigo-600 max-w-2xl w-full " role="alert" aria-live="polite"><div class="text-indigo-600 mr-3 flex-shrink-0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg></div><div class="min-w-0 flex-1"><div class="font-semibold text-indigo-600 mb-1">Information</div><div class="text-sm text-gray-700">This is an informational message. Use it to provide helpful context or instructions.</div></div><button type="button" aria-label="Dismiss alert" class="ml-auto text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 rounded" onclick="this.closest('.swp-alert').style.display='none'" tabindex="0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button></div></div>
+<div class="h-6"></div>
+
+    <section class="bg-gray-50 py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">Success Alert</h2><p class="text-gray-500 text-lg text-center mt-2">For confirmations and positive outcomes</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div id="swp-alert-650384" class="swp-alert bg-white border rounded-md p-4 flex items-start gap-3 border border-green-600 max-w-2xl w-full " role="alert" aria-live="polite"><div class="text-green-600 mr-3 flex-shrink-0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div class="min-w-0 flex-1"><div class="font-semibold text-green-600 mb-1">Success!</div><div class="text-sm text-gray-700">Your changes have been saved successfully.</div></div><button type="button" aria-label="Dismiss alert" class="ml-auto text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 rounded" onclick="this.closest('.swp-alert').style.display='none'" tabindex="0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button></div></div>
+<div class="h-6"></div>
+
+    <section class="bg-white py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">Warning Alert</h2><p class="text-gray-500 text-lg text-center mt-2">For cautions and potential issues</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div id="swp-alert-928368" class="swp-alert bg-white border rounded-md p-4 flex items-start gap-3 border border-yellow-400 max-w-2xl w-full " role="alert" aria-live="polite"><div class="text-yellow-500 mr-3 flex-shrink-0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div><div class="min-w-0 flex-1"><div class="font-semibold text-yellow-500 mb-1">Warning</div><div class="text-sm text-gray-700">This action is irreversible. Please review before proceeding.</div></div><button type="button" aria-label="Dismiss alert" class="ml-auto text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 rounded" onclick="this.closest('.swp-alert').style.display='none'" tabindex="0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button></div></div>
+<div class="h-6"></div>
+
+    <section class="bg-gray-50 py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">Error Alert</h2><p class="text-gray-500 text-lg text-center mt-2">For errors and critical issues</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div id="swp-alert-928480" class="swp-alert bg-white border rounded-md p-4 flex items-start gap-3 border border-red-500 max-w-2xl w-full " role="alert" aria-live="assertive"><div class="text-red-500 mr-3 flex-shrink-0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div><div class="min-w-0 flex-1"><div class="font-semibold text-red-500 mb-1">Error</div><div class="text-sm text-gray-700">Something went wrong. Please try again or contact support.</div></div><button type="button" aria-label="Dismiss alert" class="ml-auto text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 rounded" onclick="this.closest('.swp-alert').style.display='none'" tabindex="0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button></div></div>
+<div class="h-6"></div>
+
+    <section class="bg-white py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">Auto-dismiss Alert</h2><p class="text-gray-500 text-lg text-center mt-2">This alert closes after 5 seconds</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div id="swp-alert-658352" class="swp-alert bg-white border rounded-md p-4 flex items-start gap-3 border border-indigo-600 max-w-2xl w-full " role="alert" aria-live="polite"><div class="text-indigo-600 mr-3 flex-shrink-0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg></div><div class="min-w-0 flex-1"><div class="font-semibold text-indigo-600 mb-1">Auto-dismiss Demo</div><div class="text-sm text-gray-700">This alert will automatically close in 5 seconds.</div></div></div></div><script>setTimeout(()=>{var el=document.getElementById('swp-alert-658352');if(el)el.style.display='none';},5*1000)</script>
+<div class="h-6"></div>
+
+    <section class="bg-gray-50 py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">Minimal Alert</h2><p class="text-gray-500 text-lg text-center mt-2">Simple message without icon or dismiss button</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div id="swp-alert-807792" class="swp-alert bg-white border rounded-md p-4 flex items-start gap-3 border border-indigo-600 max-w-2xl w-full " role="alert" aria-live="polite"><div class="min-w-0 flex-1"><div class="text-sm text-gray-700">A minimal alert message.</div></div></div></div>
+<div class="h-6"></div>
+
+    <section class="bg-white py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-gray-900 text-3xl font-bold text-center">Multiple Alerts</h2><p class="text-gray-500 text-lg text-center mt-2">Stacking different kinds together</p>
+      </div>
+    </section>
+    
+<div class="h-4"></div>
+<div class="flex justify-center px-6 py-4"><div id="swp-alert-996720" class="swp-alert bg-white border rounded-md p-4 flex items-start gap-3 border border-indigo-600 max-w-2xl w-full " role="alert" aria-live="polite"><div class="text-indigo-600 mr-3 flex-shrink-0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg></div><div class="min-w-0 flex-1"><div class="text-sm text-gray-700">First notification</div></div><button type="button" aria-label="Dismiss alert" class="ml-auto text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 rounded" onclick="this.closest('.swp-alert').style.display='none'" tabindex="0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button></div></div>
+<div class="h-3"></div>
+<div class="flex justify-center px-6 py-4"><div id="swp-alert-996784" class="swp-alert bg-white border rounded-md p-4 flex items-start gap-3 border border-green-600 max-w-2xl w-full " role="alert" aria-live="polite"><div class="text-green-600 mr-3 flex-shrink-0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div class="min-w-0 flex-1"><div class="text-sm text-gray-700">Second notification</div></div><button type="button" aria-label="Dismiss alert" class="ml-auto text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 rounded" onclick="this.closest('.swp-alert').style.display='none'" tabindex="0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button></div></div>
+<div class="h-3"></div>
+<div class="flex justify-center px-6 py-4"><div id="swp-alert-997168" class="swp-alert bg-white border rounded-md p-4 flex items-start gap-3 border border-yellow-400 max-w-2xl w-full " role="alert" aria-live="polite"><div class="text-yellow-500 mr-3 flex-shrink-0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div><div class="min-w-0 flex-1"><div class="text-sm text-gray-700">Third notification</div></div><button type="button" aria-label="Dismiss alert" class="ml-auto text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 rounded" onclick="this.closest('.swp-alert').style.display='none'" tabindex="0"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button></div></div>
+<div class="h-6"></div>
+<footer class="bg-gray-100 text-gray-500 text-center text-sm py-8 px-6">© 2025 SlabWebPy · made with Python · https://github.com/DEV-Gordon/slabwebpy</footer>
+</body>
+</html>

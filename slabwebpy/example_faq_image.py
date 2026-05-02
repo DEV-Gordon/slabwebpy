@@ -55,6 +55,29 @@ swp.faq(
     open_first=True,
 )
 
+swp.form(
+            title="Contact us",
+            description="We'll get back to you within 24 hours.",
+            color="indigo",
+            columns=2,
+            fields=[
+                {"type": "text",     "name": "name",    "label": "Full name",
+                "placeholder": "Jane Doe", "required": True},
+                {"type": "email",    "name": "email",   "label": "Email",
+                "placeholder": "jane@example.com", "required": True},
+                {"type": "tel",      "name": "phone",   "label": "Phone",
+                "placeholder": "+1 555 000 0000"},
+                {"type": "select",   "name": "plan",    "label": "Plan",
+                "options": ["Free", "Pro", "Teams"], "required": True},
+                {"type": "textarea", "name": "message", "label": "Message",
+                "placeholder": "How can we help?", "rows": 5,
+                "helper": "Minimum 20 characters."},
+                {"type": "checkbox", "name": "tos",     "label": "I accept the Terms of Service",
+                "required": True},
+            ],
+            submit_label="Send message",
+        )
+
 swp.footer("© 2026 SlabWebPy")
 
 swp.build("dist/example_faq_image.html")

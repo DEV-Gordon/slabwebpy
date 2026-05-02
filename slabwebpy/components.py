@@ -429,13 +429,275 @@ def image(
         f'</div>'
     )
 
-def form():
-    """Form component (coming soon)."""
-    pass
+def form(
+    fields: list[dict],
+    action: str = "#",
+    method: str = "post",
+    submit_label: str = "Send",
+    title: str = "",
+    description: str = "",
+    color: str = "indigo",
+    bg: str = "white",
+    columns: int = 1,
+):
+    """Contact / data-entry form component.
 
-def alert():
-    """Alert / notification component (coming soon)."""
-    pass
+    Args:
+        fields:       List of field dicts. Each dict supports:
+                        "type"        — "text" | "email" | "password" | "number" | "tel" |
+                                        "url" | "date" | "textarea" | "select" | "checkbox" | "radio"
+                        "name"        — HTML name attribute (required for all).
+                        "label"       — Visible label text.
+                        "placeholder" — Placeholder for text inputs / textarea.
+                        "required"    — True to mark field as required (adds * to label).
+                        "rows"        — Number of visible rows for textarea (default: 4).
+                        "options"     — List of strings for select / radio inputs.
+                        "value"       — Pre-filled default value.
+                        "helper"      — Small hint text shown below the field.
+                        "half"        — True to make this field half-width in a 2-col layout.
+        action:       Form action URL.
+        method:       HTTP method: "post" or "get".
+        submit_label: Text inside the submit button.
+        title:        Optional heading above the form.
+        description:  Optional subtext below the title.
+        color:        Accent color for the submit button and focus rings.
+        bg:           Background of the form card: "white", "gray", "dark".
+        columns:      Layout columns for fields: 1 or 2.
+
+    Example:
+        swp.form(
+            title="Contact us",
+            description="We'll get back to you within 24 hours.",
+            color="indigo",
+            columns=2,
+            fields=[
+                {"type": "text",     "name": "name",    "label": "Full name",
+                "placeholder": "Jane Doe", "required": True},
+                {"type": "email",    "name": "email",   "label": "Email",
+                "placeholder": "jane@example.com", "required": True},
+                {"type": "tel",      "name": "phone",   "label": "Phone",
+                "placeholder": "+1 555 000 0000"},
+                {"type": "select",   "name": "plan",    "label": "Plan",
+                "options": ["Free", "Pro", "Teams"], "required": True},
+                {"type": "textarea", "name": "message", "label": "Message",
+                "placeholder": "How can we help?", "rows": 5,
+                "helper": "Minimum 20 characters."},
+                {"type": "checkbox", "name": "tos",     "label": "I accept the Terms of Service",
+                "required": True},
+            ],
+            submit_label="Send message",
+        )
+    """
+
+    # palette
+    btn_bg    = themes.color(color, 0)           # e.g. "bg-indigo-600"
+    btn_hover = themes.color(color, 3)           # e.g. "hover:bg-indigo-700"
+    ring      = f"focus:ring-2 focus:ring-{color}-400 focus:outline-none"
+
+    bg_map = {
+        "white": ("bg-white",   "text-gray-900", "text-gray-500", "text-gray-700",
+                    "bg-white border-gray-200 text-gray-900",
+                    "bg-white border-gray-200 text-gray-900"),
+        "gray":  ("bg-gray-50", "text-gray-900", "text-gray-500", "text-gray-700",
+                    "bg-white border-gray-200 text-gray-900",
+                    "bg-white border-gray-200 text-gray-900"),
+        "dark":  ("bg-gray-900","text-white",    "text-gray-400", "text-gray-300",
+                    "bg-gray-800 border-gray-700 text-white placeholder-gray-500",
+                    "bg-gray-800 border-gray-700 text-white"),
+    }
+    card_bg, title_col, desc_col, label_col, input_cls_base, select_cls_base = (
+        bg_map.get(bg, bg_map["white"])
+    )
+
+    # shared input classes
+    base_input = (
+        f"w-full border rounded-lg px-4 py-2.5 text-sm transition "
+        f"{input_cls_base} {ring} "
+        f"disabled:opacity-50 disabled:cursor-not-allowed"
+    )
+    base_select = (
+        f"w-full border rounded-lg px-4 py-2.5 text-sm transition "
+        f"appearance-none cursor-pointer "
+        f"{select_cls_base} {ring}"
+    )
+
+    # header 
+    header_html = ""
+    if title:
+        header_html += (
+            f'<h2 class="{title_col} text-2xl font-bold mb-1">{title}</h2>'
+        )
+    if description:
+        header_html += (
+            f'<p class="{desc_col} text-sm mb-6">{description}</p>'
+        )
+    if header_html:
+        header_html = f'<div class="mb-6">{header_html}</div>'
+
+    # field builder 
+    def _label(field: dict) -> str:
+        lbl  = field.get("label", "")
+        req  = field.get("required", False)
+        name = field.get("name", "")
+        star = f' <span class="text-red-500">*</span>' if req else ""
+        return (
+            f'<label for="{name}" '
+            f'class="{label_col} text-sm font-medium block mb-1">'
+            f'{lbl}{star}</label>'
+        )
+
+    def _helper(field: dict) -> str:
+        hint = field.get("helper", "")
+        if not hint:
+            return ""
+        return f'<p class="text-gray-400 text-xs mt-1">{hint}</p>'
+
+    def _required_attr(field: dict) -> str:
+        return 'required' if field.get("required") else ''
+
+    def _build_field(field: dict) -> str:
+        ftype = field.get("type", "text")
+        name  = field.get("name", "")
+        ph    = field.get("placeholder", "")
+        val   = field.get("value", "")
+        req   = _required_attr(field)
+
+        # textarea
+        if ftype == "textarea":
+            rows = field.get("rows", 4)
+            return (
+                f'{_label(field)}'
+                f'<textarea id="{name}" name="{name}" rows="{rows}" '
+                f'placeholder="{ph}" {req} '
+                f'class="{base_input} resize-y min-h-[80px]">'
+                f'{val}</textarea>'
+                f'{_helper(field)}'
+            )
+
+        # select 
+        if ftype == "select":
+            options = field.get("options", [])
+            opts_html = "".join(
+                f'<option value="{o}" {"selected" if o == val else ""}>{o}</option>'
+                for o in options
+            )
+            return (
+                f'{_label(field)}'
+                f'<div class="relative">'
+                f'<select id="{name}" name="{name}" {req} '
+                f'class="{base_select}">'
+                f'<option value="" disabled {"selected" if not val else ""}>'
+                f'{ph or "Choose an option"}</option>'
+                f'{opts_html}'
+                f'</select>'
+                # custom chevron
+                f'<span class="pointer-events-none absolute inset-y-0 right-3 '
+                f'flex items-center text-gray-400 text-xs">▾</span>'
+                f'</div>'
+                f'{_helper(field)}'
+            )
+
+        # checkbox 
+        if ftype == "checkbox":
+            lbl  = field.get("label", "")
+            req  = _required_attr(field)
+            return (
+                f'<label class="flex items-start gap-3 cursor-pointer group">'
+                f'<input type="checkbox" id="{name}" name="{name}" {req} '
+                f'class="mt-0.5 h-4 w-4 rounded border-gray-300 '
+                f'accent-{color}-600 cursor-pointer" />'
+                f'<span class="{label_col} text-sm">{lbl}</span>'
+                f'</label>'
+                f'{_helper(field)}'
+            )
+
+        # radio group 
+        if ftype == "radio":
+            options = field.get("options", [])
+            radios  = ""
+            for opt in options:
+                checked = "checked" if opt == val else ""
+                radios += (
+                    f'<label class="flex items-center gap-2 cursor-pointer">'
+                    f'<input type="radio" name="{name}" value="{opt}" {checked} '
+                    f'class="h-4 w-4 accent-{color}-600 cursor-pointer" />'
+                    f'<span class="{label_col} text-sm">{opt}</span>'
+                    f'</label>'
+                )
+            return (
+                f'{_label(field)}'
+                f'<div class="flex flex-col gap-1.5 mt-1">{radios}</div>'
+                f'{_helper(field)}'
+            )
+
+        # all other <input> types 
+        return (
+            f'{_label(field)}'
+            f'<input type="{ftype}" id="{name}" name="{name}" '
+            f'placeholder="{ph}" value="{val}" {req} '
+            f'class="{base_input}" />'
+            f'{_helper(field)}'
+        )
+
+    # field layout 
+    if columns == 2:
+        # Two-column grid; individual fields can opt into half-width
+        grid_items = []
+        for f in fields:
+            ftype = f.get("type", "text")
+            # checkboxes / radios always span full width for clarity
+            full = ftype in ("checkbox", "radio", "textarea") or not f.get("half", True)
+            col_span = "col-span-2" if full else "col-span-1"
+            grid_items.append(
+                f'<div class="{col_span}">{_build_field(f)}</div>'
+            )
+        fields_html = (
+            f'<div class="grid grid-cols-2 gap-x-6 gap-y-5">'
+            f'{"".join(grid_items)}'
+            f'</div>'
+        )
+    else:
+        fields_html = (
+            f'<div class="flex flex-col gap-5">'
+            + "".join(f'<div>{_build_field(f)}</div>' for f in fields)
+            + "</div>"
+        )
+
+    # submit 
+    submit_html = (
+        f'<div class="mt-6">'
+        f'<button type="submit" '
+        f'class="{btn_bg} {btn_hover} text-white font-semibold '
+        f'px-6 py-2.5 rounded-lg transition text-sm w-full sm:w-auto">'
+        f'{submit_label}'
+        f'</button>'
+        f'</div>'
+    )
+
+    #  assemble 
+    state.add(
+        f'<section class="{card_bg} py-16 px-6">'
+        f'<div class="max-w-2xl mx-auto">'
+        f'<form action="{action}" method="{method}" novalidate>'
+        f'{header_html}'
+        f'{fields_html}'
+        f'{submit_html}'
+        f'</form>'
+        f'</div>'
+        f'</section>'
+    )
+
+
+def alert(
+    message: str,
+    kind: str = "info",              # "info" | "success" | "warning" | "error"
+    title: str | None = None,
+    dismissable: bool = False,
+    icon: bool = True,
+    timeout: int | None = None,      # seconds, optional auto-dismiss
+    allow_html: bool = False,
+    classes: str = "",
+):
 
 def table():
     """Table component (coming soon)."""
@@ -552,14 +814,14 @@ def faq(
         f'</section>'
     )
 
-# New Components 2/2 0.3.0
-
-def gallery():
-    """Image gallery component (coming soon)."""
-    pass
-
 def code_block():
     """Code block component (coming soon)."""
+    pass
+
+# New Components 2/2 0.3.0
+
+def gallery():.
+    """Image gallery component (coming soon)."""
     pass
 
 def stats_card():

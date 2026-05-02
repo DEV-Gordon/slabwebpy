@@ -24,6 +24,7 @@ from .components import (
     footer,
     faq,
     image,
+    form,
 )
 
 from .builder import build

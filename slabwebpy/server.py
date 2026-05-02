@@ -38,7 +38,7 @@ def serve(output: str = "index.html", port: int = 8000, open_browser: bool = Tru
     with socketserver.TCPServer(("", port), QuietHandler) as httpd:
         httpd.allow_reuse_address = True
 
-        print(f"\n  🧱 SlabWeb Dev Server")
+        print(f"\n SlabWeb Dev Server")
         print(f"  ->  Local:   http://localhost:{port}")
         print(f"  ->  File: {output}")
         print(f"\n  Press Ctrl+C to stop\n")

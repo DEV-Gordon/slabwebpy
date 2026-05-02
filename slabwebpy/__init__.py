@@ -32,7 +32,7 @@ from .components import (
 from .builder import build
 from .server import serve
 
-__version__ = "0.1.0"
+__version__ = "0.2.1"
 __all__ = [
     "title",
     "navbar",
@@ -53,5 +53,6 @@ __all__ = [
     "alert",
     "code_block",
     "build",
-    "serve"
+    "serve",
+    "cli_main",
 ]

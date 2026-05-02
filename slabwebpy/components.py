@@ -451,10 +451,6 @@ def faq():
 
 # New Components 2/2 0.3.0
 
-def faq():
-    """FAQ accordion component (coming soon)."""
-    pass
-
 def gallery():
     """Image gallery component (coming soon)."""
     pass

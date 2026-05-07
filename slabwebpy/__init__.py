@@ -19,6 +19,7 @@ from .components import (
     button,
     text,
     badge,
+    badge_group,
     divider,
     spacer,
     footer,
@@ -31,6 +32,7 @@ from .components import (
 
 from .builder import build
 from .server import serve
+from .cli import main as cli_main
 
 __version__ = "0.2.1"
 __all__ = [
@@ -44,6 +46,7 @@ __all__ = [
     "button",
     "text",
     "badge",
+    "badge_group",
     "divider",
     "spacer",
     "footer",

@@ -9,6 +9,7 @@ Usage:
 """
 
 import argparse
+import importlib
 import sys
 from pathlib import Path
 from . import server
@@ -23,16 +24,28 @@ def build_command(args):
         sys.exit(1)
     
     print(f"Building {script}...")
-    
-    # Execute the script
-    with open(script) as f:
-        code = f.read()
-        try:
-            exec(code, {"__name__": "__main__"})
-        except Exception as e:
-            print(f"Error: {e}")
-            sys.exit(1)
 
+    # Allow --output to override any swp.build(...) call in the script.
+    slabwebpy = importlib.import_module("slabwebpy")
+    original_build = slabwebpy.build
+
+    if args.output:
+        output_path = str(Path(args.output))
+
+        def build_override(*_args, **_kwargs):
+            return original_build(output_path)
+
+        slabwebpy.build = build_override
+
+    try:
+        with open(script, encoding="utf-8") as f:
+            code = f.read()
+            exec(code, {"__name__": "__main__"})
+    except Exception as e:
+        print(f"Error: {e}")
+        sys.exit(1)
+    finally:
+        slabwebpy.build = original_build
 
 def serve_command(args):
     """start a local server to preview the site."""
@@ -40,7 +53,7 @@ def serve_command(args):
     directory = args.directory or "dist"
     
     print(f"Serving {directory} on http://localhost:{port}")
-    server.serve(port=port, directory=directory)
+    server.serve(output=str(Path(directory) / "index.html"), port=port, open_browser=True, rebuild=False)
 
 
 def init_command(args):

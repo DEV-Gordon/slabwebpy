@@ -84,20 +84,20 @@ def hero(
     cta_html = ""
     if cta_label:
         cta_html = (
-            f'<a href="{cta_url}" class="bg-white {btn_text} font-semibold '
-            f'px-8 py-3 rounded-full shadow hover:shadow-lg transition text-base">'
+                        f'<a href="{cta_url}" class="inline-flex items-center justify-center bg-white {btn_text} font-semibold '
+                        f'px-8 py-3 rounded-full shadow hover:shadow-lg transition text-base mt-2">'
             f'{cta_label}</a>'
         )
 
-    state.add(f"""
-    <section class="{bg_section} py-24 px-6 text-center">
-      <div class="max-w-3xl mx-auto space-y-6">
-        <h1 class="{text_color} text-5xl font-extrabold tracking-tight leading-tight">{title_text}</h1>
-        {"" if not subtitle else f'<p class="{sub_color} text-xl">{subtitle}</p>'}
-        {cta_html}
-      </div>
-    </section>
-    """)
+        state.add(f"""
+        <section class="{bg_section} py-12 md:py-16 px-6 text-center">
+            <div class="max-w-3xl mx-auto flex flex-col items-center gap-4 md:gap-5">
+                <h1 class="{text_color} text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">{title_text}</h1>
+                {"" if not subtitle else f'<p class="{sub_color} text-xl leading-relaxed">{subtitle}</p>'}
+                {cta_html}
+            </div>
+        </section>
+        """)
 
 def section(
     title_text: str = "",
@@ -128,13 +128,13 @@ def section(
     if subtitle:
         parts.append(f'<p class="{sub_color} text-lg {align} mt-2">{subtitle}</p>')
 
-    state.add(f"""
-    <section class="{bg_class} py-16 px-6">
-      <div class="max-w-6xl mx-auto">
-        {"".join(parts)}
-      </div>
-    </section>
-    """)
+        state.add(f"""
+        <section class="{bg_class} py-12 md:py-14 px-6">
+            <div class="max-w-6xl mx-auto">
+                {"".join(parts)}
+            </div>
+        </section>
+        """)
 
 def grid(columns: int = 3, gap: str = "6"):
     """Opens a responsive grid. Close it with grid_end().
@@ -225,7 +225,10 @@ def button(
     else:  # ghost
         cls = f"bg-transparent {text_c} {padding} {txt} hover:underline {w} font-medium transition"
 
-    state.add(f'<div class="px-6 py-2"><a href="{url}" class="{cls}">{label}</a></div>')
+    state.add(
+        f'<div class="max-w-6xl mx-auto px-6 py-2 text-center">'
+        f'<a href="{url}" class="{cls}">{label}</a></div>'
+    )
 
 def text(
     content: str,
@@ -267,7 +270,40 @@ def badge(label: str, color: str = "blue"):
     bg = themes.color(color, 0)
     state.add(
         f'<span class="{bg} text-white text-xs font-semibold px-3 py-1 '
-        f'rounded-full mx-6 my-2 inline-block">{label}</span>'
+        f'rounded-full inline-flex items-center">{label}</span>'
+    )
+
+def badge_group(
+    items: list[tuple[str, str]] | list[str],
+    centered: bool = True,
+):
+    """Group badges in a single horizontal row.
+
+    Args:
+        items:     List of (label, color) tuples or plain labels.
+        centered:  Center the row if True.
+
+    Example:
+        slab.badge_group([("opensource", "green"), ("v0.3.0", "blue"), ("Python", "yellow")])
+    """
+    align = "justify-center" if centered else "justify-start"
+    parts = []
+
+    for item in items:
+        if isinstance(item, tuple):
+            label, color = item
+        else:
+            label, color = item, "blue"
+
+        bg = themes.color(color, 0)
+        parts.append(
+            f'<span class="{bg} text-white text-xs font-semibold px-3 py-1 '
+            f'rounded-full inline-flex items-center">{label}</span>'
+        )
+
+    state.add(
+        f'<div class="max-w-6xl mx-auto px-6 py-4 mt-2 flex flex-wrap {align} gap-2">'
+        f'{"".join(parts)}</div>'
     )
 
 def divider(margin: str = "8"):

@@ -10,7 +10,12 @@ from pathlib import Path
 from slabwebpy.builder import build
 
 # Dev server to serve the built HTML file
-def serve(output: str = "index.html", port: int = 8000, open_browser: bool = True):
+def serve(
+    output: str = "index.html",
+    port: int = 8000,
+    open_browser: bool = True,
+    rebuild: bool = True,
+):
     
     """Builds the page and starts a local dev server.
 
@@ -18,12 +23,14 @@ def serve(output: str = "index.html", port: int = 8000, open_browser: bool = Tru
         output:       File path to build and serve.
         port:         Port number (default 8000).
         open_browser: Open the browser automatically if True.
+        rebuild:      Rebuild output before serving (default True).
 
     Example:
         slab.serve("dist/index.html", port=3000)
     """
 
-    build(output)
+    if rebuild:
+        build(output)
 
     folder = str(Path(output).parent.resolve())
     os.chdir(folder)

@@ -23,7 +23,7 @@ NAVBAR_LINKS = [
 # ─────────────────────────────────────────────────────────────────────────────
 
 def build_home():
-    """Construye la página de inicio."""
+    """build home page."""
     
     swp.title("SlapWebPy - Static Sites with Python")
     swp.navbar("SlabWebPy", links=NAVBAR_LINKS, sticky=True)
@@ -42,11 +42,11 @@ def build_home():
         bg="gray"
     )
     
-    swp.spacer("4")
-    swp.badge("opensource", color="green")
-    swp.badge("v0.3.0", color="blue")
-    swp.badge("Python", color="yellow")
-    swp.spacer("4")
+    swp.badge_group([
+        ("opensource", "green"),
+        ("v0.3.0", "blue"),
+        ("Python", "yellow"),
+    ])
     
     swp.grid(3)
     swp.card("Fast and Efficient", "Generate static sites quickly.", icon="⚡", color="yellow")
@@ -71,7 +71,7 @@ def build_home():
 # ─────────────────────────────────────────────────────────────────────────────
 
 def build_contact():
-    """Construye la página de contacto con formulario."""
+    """build contact page."""
     
     swp.title("Contact — SlabWebPy")
     swp.navbar("SlabWebPy", links=NAVBAR_LINKS, sticky=True)
@@ -110,7 +110,7 @@ def build_contact():
 # ─────────────────────────────────────────────────────────────────────────────
 
 def build_docs():
-    """Construye la página de documentación."""
+    """build documentation page."""
     
     swp.title("Documentation — SlabWebPy")
     swp.navbar("SlabWebPy", links=NAVBAR_LINKS, sticky=True)
@@ -153,9 +153,11 @@ swp.build("dist/index.html")""",
 
 if __name__ == "__main__":
     print("Building multi-page site...\n")
-    
+
     build_home()      # Create dist/index.html
     build_contact()   # Create dist/contact.html
     build_docs()      # Create dist/docs.html
-    
+
+    swp.serve("dist/index.html", port=3000, rebuild=False)
+
     print("\n✓ Site complete! Open dist/index.html in your browser.")

@@ -66,8 +66,8 @@ def init_command(args):
         sys.exit(1)
     
     project_dir.mkdir()
-    (project_dir / "pages.py").write_text(STARTER_TEMPLATE)
-    (project_dir / ".gitignore").write_text("dist/\n__pycache__/\n*.pyc\n")
+    (project_dir / "pages.py").write_text(STARTER_TEMPLATE, encoding="utf-8")
+    (project_dir / ".gitignore").write_text("dist/\n__pycache__/\n*.pyc\n", encoding="utf-8")
     
     print(f"✓ Project '{project_name}' created!")
     print(f"  Run: cd {project_name} && python pages.py")
